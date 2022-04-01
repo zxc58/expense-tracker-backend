@@ -1,0 +1,60 @@
+<!-- Filter -->
+<form action="/" id="filterForm">
+  <fieldset>
+    <div class="form-group d-flex">
+      <select  id="filterSelect" name="filterByCategory" >
+        <option value="all">全部</option>
+        {{#each categoryList}}
+          <option {{this.selected}} value="{{this._id}}"><i class="{{this.iconClass}}"></i>{{this.name}}</option>
+        {{/each}}
+      </select>
+      <a class="btn btn-success ms-auto" href="/record/new">create a new record</a>
+    </div>
+  </fieldset>
+</form>
+<br/>
+<!-- Total Amount -->
+total Amount:<h1 class="text-center">{{totalAmount}}</h1>
+<!-- Record List -->
+<ul class="list-group border border-primary" >
+  {{#each searchResults}}
+  <li class="list-group-item d-flex justify-content-between align-items-center border border-primary "> 
+    <i class="{{this.categoryId.iconClass}} me-4"></i>
+    <figure class=" mb-0">
+      <blockquote class="blockquote ">
+        <p class="mb-0">{{this.name}}</p>
+      </blockquote>
+      <figcaption class="blockquote-footer mb-0">
+        {{this.date}} 
+      </figcaption>
+    </figure>
+    <h4 class="ms-auto text-end">{{this.amount}}</h4>
+    <div class="ms-auto">
+      <a href="/record/{{this._id}}/edit" class="btn btn-warning btn-sm">Edit</a>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">確定刪除?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+              <form action="/record/{{this._id}}?_method=DELETE" method="POST">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger ">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  {{/each}}
+</ul>
+<br/>
+
+<script src="/javascript/homePageJs.js"></script>
+
