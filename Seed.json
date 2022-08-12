@@ -1,0 +1,20 @@
+{
+    "categoryList":[
+        {"name":"家居物業","icon_class": "fa-solid fa-house"},
+        {"name":"交通出行","icon_class": "fa-solid fa-van-shuttle"},
+        {"name":"休閒娛樂","icon_class": "fa-solid fa-face-grin-beam"},
+        {"name":"餐飲食品","icon_class": "fa-solid fa-utensils"},
+        {"name":"其他","icon_class": "fa-solid fa-pen"}
+    ],
+    "userList":[
+        {"name":"爸爸","email":"user1@example.com","password":"12345678"},
+        {"name":"哥哥","email":"user2@example.com","password":"12345678"}
+    ],
+    "recordList":[
+        {"name":"午餐","date":"2019-04-21","amount":60,"user_id":"1","category_id":"4"},
+        {"name":"晚餐","date":"2019-04-20","amount":60,"user_id":"1","category_id":"4"},
+        {"name":"捷運","date":"2019-04-22","amount":120,"user_id":"1","category_id":"2"},
+        {"name":"電影:驚奇隊長","date":"2019-04-23","amount":220,"user_id":"2","category_id":"3"},
+        {"name":"租金","date":"2015-04-01","amount":25000,"user_id":"1","category_id":"1"}
+    ]
+}

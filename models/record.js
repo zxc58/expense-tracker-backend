@@ -1,12 +1,28 @@
-//
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const recordSchema = new Schema({
-  name: { type: String, required: true },
-  date: { type: Date, required: true },
-  amount: { type: Number, required: true },
-  userId: { type: Schema.Types.ObjectId, ref: 'User', index: true, required: true },
-  categoryId: { type: Schema.Types.ObjectId, ref: 'Category', index: true, required: true }
-})
-//
-module.exports = mongoose.model('Record', recordSchema)
+'use strict'
+const {
+  Model
+} = require('sequelize')
+module.exports = (sequelize, DataTypes) => {
+  class Record extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate (models) {
+      Record.belongsTo(models.User, { foreignKey: 'userId' })
+      Record.belongsTo(models.Category, { foreignKey: 'categoryId' })
+    }
+  }
+  Record.init({
+    name: DataTypes.STRING,
+    date: DataTypes.DATE,
+    amount: DataTypes.NUMBER
+  }, {
+    sequelize,
+    modelName: 'Record',
+    underscored: true,
+    tableName: 'Records'
+  })
+  return Record
+}
