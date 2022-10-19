@@ -9,12 +9,6 @@ const { authenticator: { jwtAuthenticator } } = require('../middlewares')
 router.use('/users', user)
 router.use('/records', jwtAuthenticator, record)
 router.use('/categories', jwtAuthenticator, category)
-//
-// router.options('/', (req, res) => {
-//   res.header('Access-Control-Allow-Origin', '*')
-//   res.header('Access-Control-Allow-Headers', 'content-type')
-//   res.end()
-// })
 router.use('/', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'content-type')

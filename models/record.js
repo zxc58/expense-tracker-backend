@@ -17,7 +17,21 @@ module.exports = (sequelize, DataTypes) => {
   Record.init({
     name: DataTypes.STRING,
     date: DataTypes.DATE,
-    amount: DataTypes.NUMBER
+    amount: DataTypes.NUMBER,
+    userId: {
+      type: DataTypes.NUMBER,
+      references: {
+        model: 'Users',
+        key: 'id'
+      }
+    },
+    categoryId: {
+      type: DataTypes.NUMBER,
+      references: {
+        model: 'Categories',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'Record',

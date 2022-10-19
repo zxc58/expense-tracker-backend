@@ -13,9 +13,9 @@ module.exports = {
     recordList.forEach(e => { e.created_at = new Date(); e.updated_at = new Date() })
     await Promise.all([
       queryInterface.bulkInsert('Users', userList),
-      queryInterface.bulkInsert('Categories', categoryList),
-      queryInterface.bulkInsert('Records', recordList)
+      queryInterface.bulkInsert('Categories', categoryList)
     ])
+    await queryInterface.bulkInsert('Records', recordList)
   },
 
   async down (queryInterface, Sequelize) {

@@ -1,8 +1,6 @@
-//
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-// require('./config/mongoose')
 require('./models')
 const express = require('express')
 const cors = require('cors')
@@ -17,6 +15,10 @@ app.use(express.json())
 usePassport(app)
 app.use('/', router)
 //
-app.listen(process.env.PORT, () => {
-  console.log(`http://localhost:${process.env.PORT}`)
-})
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(process.env.PORT || 3000, () => {
+    console.log(`http://localhost:${process.env.PORT}`)
+  })
+}
+//
+module.exports = app

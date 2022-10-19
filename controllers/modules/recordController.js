@@ -17,7 +17,7 @@ const recordController = {
   postRecord: async (req, res, next) => {
     try {
       if (!validationResult(req).isEmpty()) {
-        return res.status(500).json({ status: false, message: 'validation failss', errors: JSON.stringify(validationResult(req).array()) })
+        return res.status(500).json({ status: false, message: 'validation fails', errors: JSON.stringify(validationResult(req).array()) })
       }
       const { name, date } = req.body
       const [amount, categoryId] = [Number(req.body.amount), Number(req.body.categoryId)]
@@ -32,7 +32,7 @@ const recordController = {
   putRecord: async (req, res, next) => {
     try {
       if (!validationResult(req).isEmpty()) {
-        return res.status(500).json({ status: false, message: 'validation failsss', errors: JSON.stringify(validationResult(req).array()) })
+        return res.status(500).json({ status: false, message: 'validation fail', errors: JSON.stringify(validationResult(req).array()) })
       }
       const { name, date } = req.body
       const [amount, categoryId] = [Number(req.body.amount), Number(req.body.categoryId)]
@@ -40,7 +40,6 @@ const recordController = {
       const userId = req.user.id
       const updateData = await updateRecord(id, userId, { name, date, amount, categoryId })
       const message = 'Update record success,updateData->record after update'
-      console.log(updateData)
       return res.json({ status: true, message, updateData })
     } catch (error) {
       console.log(error)
