@@ -46,10 +46,10 @@ describe('CRUD record', () => {
   })
 
   test('Update record', async () => {
-    const newRecord = { name: 'test record', amount: 20, categoryId: categoryList.at(1).id, date: '1993-01-19' }
+    const newRecord = { name: 'test record', amount: 220, categoryId: categoryList.at(1).id, date: '1993-01-19' }
     await request('put', `/records/${id}`, newRecord)
     const database = (await Record.findByPk(id)).toJSON()
-    expect(database.amount).toBe(20)
+    expect(database.amount).toBe(220)
   })
 
   test('Delete record', async () => {
