@@ -14,8 +14,14 @@ beforeAll(async () => {
   })
   const app = require('../app')
   backEnd = supertest(app)
-  const userData = { email: 'test@example.com', password: bcryptjs.hashSync('123456789'), name: 'Mr.Test' }
-  categories.forEach(e => { e.iconClass = e.icon_class })
+  const userData = {
+    email: 'test@example.com',
+    password: bcryptjs.hashSync('123456789'),
+    name: 'Mr.Test'
+  }
+  categories.forEach((e) => {
+    e.iconClass = e.icon_class
+  })
   await Promise.all([Category.bulkCreate(categories), User.create(userData)])
   return 'Init database (1 user, all categories)'
 })
@@ -26,14 +32,25 @@ describe('CRUD record', () => {
   beforeAll(async () => {
     categoryList = await Category.findAll({ raw: true, nest: true })
     request = (method, url, data) => {
-      const withoutData = backEnd[method](url).set('Content-Type', 'application/json').set('Accept', 'application/json')
-      if (method === 'post' || method === 'put') { return withoutData.send(data) } else if (method === 'get' || method === 'delete') { return withoutData }
+      const withoutData = backEnd[method](url)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+      if (method === 'post' || method === 'put') {
+        return withoutData.send(data)
+      } else if (method === 'get' || method === 'delete') {
+        return withoutData
+      }
     }
     return 'Sign in (get jwt) and connect with jwt, get category list'
   })
 
   test('Create record', async () => {
-    const record = { name: 'test record', amount: 2, categoryId: categoryList.at(0).id, date: '1993-12-19' }
+    const record = {
+      name: 'test record',
+      amount: 2,
+      categoryId: categoryList.at(0).id,
+      date: '1993-12-19'
+    }
     const response = await request('post', '/records', record)
     id = JSON.parse(response?.text).postData.id
     const database = await Record.findByPk(id)
@@ -42,11 +59,19 @@ describe('CRUD record', () => {
 
   test('Get all records', async () => {
     const response = await request('get', '/records')
-    expect(JSON.parse(response?.text)).toMatchObject({ status: true, message: /get all record success/ })
+    expect(JSON.parse(response?.text)).toMatchObject({
+      status: true,
+      message: /get all record success/
+    })
   })
 
   test('Update record', async () => {
-    const newRecord = { name: 'test record', amount: 220, categoryId: categoryList.at(1).id, date: '1993-01-19' }
+    const newRecord = {
+      name: 'test record',
+      amount: 220,
+      categoryId: categoryList.at(1).id,
+      date: '1993-01-19'
+    }
     await request('put', `/records/${id}`, newRecord)
     const database = (await Record.findByPk(id)).toJSON()
     expect(database.amount).toBe(220)

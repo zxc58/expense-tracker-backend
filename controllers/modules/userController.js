@@ -8,7 +8,9 @@ const userController = {
   signIn: async (req, res, next) => {
     try {
       const { id } = req.user
-      const token = jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' })
+      const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '1d'
+      })
       return res.json({ status: true, message: 'get jwt token', token })
     } catch (error) {
       console.log(error)

@@ -3,7 +3,13 @@ const { User, Record, Category } = require('../../models')
 const recordService = {
   createRecord: async (object) => {
     const { name, date, amount, categoryId, userId } = object
-    const postRecord = await Record.create({ name, date, amount, categoryId, userId })
+    const postRecord = await Record.create({
+      name,
+      date,
+      amount,
+      categoryId,
+      userId
+    })
     return postRecord.toJSON()
   },
   getOnesAllRecord: async (userId) => {
@@ -17,11 +23,15 @@ const recordService = {
     return userWithRecords
   },
   getOneRecord: async (recordId) => {
-    const record = await Record.findByPk(recordId, { attributes: { exclude: ['createdAt', 'updatedAt'] } })
+    const record = await Record.findByPk(recordId, {
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
+    })
     return record.toJSON()
   },
   updateRecord: async (recordId, userId, newData) => {
-    const record = await Record.findByPk(recordId, { attributes: { exclude: ['createdAt', 'updatedAt'] } })
+    const record = await Record.findByPk(recordId, {
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
+    })
     if (!record) {
       throw new Error('Wrong parameter,record do not exist')
     }

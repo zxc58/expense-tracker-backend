@@ -1,5 +1,8 @@
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
+  const result = require('dotenv').config()
+  if (result.error) {
+    throw new Error('Please provide .env file')
+  }
 }
 require('./models')
 const express = require('express')

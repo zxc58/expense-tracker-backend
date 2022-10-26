@@ -1,7 +1,5 @@
 'use strict'
-const {
-  Model
-} = require('sequelize')
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
     /**
@@ -9,18 +7,21 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate (models) {
+    static associate(models) {
       Category.hasMany(models.Record, { foreignKey: 'categoryId' })
     }
   }
-  Category.init({
-    name: DataTypes.STRING,
-    iconClass: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Category',
-    underscored: true,
-    tableName: 'Categories'
-  })
+  Category.init(
+    {
+      name: DataTypes.STRING,
+      iconClass: DataTypes.STRING
+    },
+    {
+      sequelize,
+      modelName: 'Category',
+      underscored: true,
+      tableName: 'Categories'
+    }
+  )
   return Category
 }

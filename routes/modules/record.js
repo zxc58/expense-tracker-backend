@@ -1,8 +1,12 @@
 const express = require('express')
 const router = express.Router()
 //
-const { validator: { recordValidationGuard } } = require('../../middlewares')
-const { recordController: { getRecord, putRecord, deleteRecord, postRecord } } = require('../../controllers')
+const {
+  validator: { recordValidationGuard }
+} = require('../../middlewares')
+const {
+  recordController: { getRecord, putRecord, deleteRecord, postRecord }
+} = require('../../controllers')
 //
 router.get('/', getRecord)
 router.post('/', recordValidationGuard, postRecord)
